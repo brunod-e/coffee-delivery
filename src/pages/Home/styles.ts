@@ -14,6 +14,48 @@ export const IntroContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 34rem;
-  /* filter: blur(80px); */
+
+  padding: 5.875rem 13rem;
+
   background: url("src/assets/intro-bg.svg");
+`;
+
+export const IntroInfos = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 1rem;
+
+  width: 35.3rem;
+
+  strong {
+    color: ${(props) => props.theme["base-title"]};
+    font-family: "Baloo 2", sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 4rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+    color: ${(props) => props.theme["base-subtitle"]};
+  }
+`;
+
+export const IntroGridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1.25rem 2.5rem;
+
+  span {
+    display: flex;
+    align-items: center;
+
+    gap: 0.75rem;
+
+    color: ${(props) => props.theme["base-text"]};
+  }
 `;
