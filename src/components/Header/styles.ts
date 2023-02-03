@@ -10,6 +10,7 @@ export const HeaderContainer = styled.header`
 
 export const CartButton = styled.button`
   display: flex;
+  position: relative;
   align-items: center;
   padding: 0.6rem;
   border-radius: 6px;
@@ -22,9 +23,24 @@ export const CartButton = styled.button`
 
   transition: 0.5s;
 
-  &:hover {
-    background: ${(props) => props.theme["yellow"]};
-    color: ${(props) => props.theme["yellow-light"]};
+  span {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+
+    width: 1.25rem;
+    height: 1.25rem;
+
+    border-radius: 100%;
+    background: ${(props) => props.theme["yellow-dark"]};
+    color: ${(props) => props.theme["white"]};
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    margin-left: 1.2rem;
+    margin-top: -2.2rem;
   }
 `;
 

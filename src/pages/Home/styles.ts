@@ -25,7 +25,7 @@ export const IntroInfos = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  gap: 1rem;
+  gap: 0.875rem;
 
   width: 35.3rem;
 
@@ -41,6 +41,8 @@ export const IntroInfos = styled.div`
     font-size: 1.25rem;
     line-height: 1.625rem;
     color: ${(props) => props.theme["base-subtitle"]};
+
+    margin-bottom: 2rem;
   }
 `;
 

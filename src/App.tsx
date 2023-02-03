@@ -4,6 +4,7 @@ import { Router } from "./Router";
 import { IconContext } from "phosphor-react";
 import { GlobalStyle } from "./styles/global";
 import { defaultTheme } from "./styles/themes/default";
+import { CoffeesContextProvider } from "./context/CoffeesContext";
 
 export const App = () => {
   return (
@@ -15,7 +16,9 @@ export const App = () => {
         }}
       >
         <BrowserRouter>
-          <Router />
+          <CoffeesContextProvider>
+            <Router />
+          </CoffeesContextProvider>
         </BrowserRouter>
         <GlobalStyle />
       </IconContext.Provider>
