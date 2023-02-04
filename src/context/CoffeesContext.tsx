@@ -1,16 +1,27 @@
 import { createContext, useEffect, useReducer } from "react";
 import {
   addCoffeeToCartAction,
+  changeCheckoutCoffeeInfosAction,
+  changeQuantityFromCartAction,
   removeCoffeeFromCartAction,
 } from "../reducers/actions";
-import { Coffee, coffeesReducer } from "../reducers/reducer";
+import {
+  CheckoutCoffeeInfos,
+  Coffee,
+  coffeesReducer,
+} from "../reducers/reducer";
 import { coffeesData } from "./data";
 
 interface CoffeesContextData {
   coffees: Coffee[];
+  checkoutCoffeeInfos: CheckoutCoffeeInfos;
+  currency: string;
   selectedCoffees: Coffee[];
   addCoffeeToCart: (coffee: Coffee) => void;
-  removeCoffeeFromCart: (coffee: Coffee) => void;
+  removeCoffeeFromCart: (coffeeId: string) => void;
+  changeQuantityFromCart: (coffeeId: string, quantity: number) => void;
+  changeCheckoutCoffeeInfos: (infos: CheckoutCoffeeInfos) => void;
+  formatCoffeePrice: (price: number, currency?: string) => string;
 }
 
 interface CoffeesContextProviderProps {
@@ -26,6 +37,17 @@ export const CoffeesContextProvider = ({
     coffeesReducer,
     {
       selectedCoffees: [],
+      currency: "",
+      checkoutCoffeeInfos: {
+        cep: "",
+        rua: "",
+        numero: "",
+        complemento: "",
+        bairro: "",
+        cidade: "",
+        uf: "",
+        method: "",
+      },
     },
     (state) => {
       const storedCartState = localStorage.getItem(
@@ -39,21 +61,43 @@ export const CoffeesContextProvider = ({
       return state;
     }
   );
-  const { selectedCoffees } = cartState;
+  const { selectedCoffees, checkoutCoffeeInfos } = cartState;
 
   const coffees: Coffee[] = coffeesData;
+  const currency: string = "BRL";
 
   const addCoffeeToCart = (coffee: Coffee) => {
     dispatch(addCoffeeToCartAction(coffee));
   };
 
-  const removeCoffeeFromCart = (coffee: Coffee) => {
-    dispatch(removeCoffeeFromCartAction(coffee));
+  const removeCoffeeFromCart = (coffeeId: string) => {
+    dispatch(removeCoffeeFromCartAction(coffeeId));
+  };
+
+  const changeQuantityFromCart = (coffeeId: string, quantity: number) => {
+    dispatch(changeQuantityFromCartAction(coffeeId, quantity));
+  };
+
+  const changeCheckoutCoffeeInfos = (infos: CheckoutCoffeeInfos) => {
+    dispatch(changeCheckoutCoffeeInfosAction(infos));
+  };
+
+  const formatCoffeePrice = (price: number, currency?: string) => {
+    const formatOption = currency
+      ? {
+          style: "currency",
+          currency: currency,
+        }
+      : {
+          style: "decimal",
+          minimumFractionDigits: 2,
+        };
+
+    return new Intl.NumberFormat("pt-BR", formatOption).format(price);
   };
 
   useEffect(() => {
     const cartStateString = cartState ? JSON.stringify(cartState) : "";
-    console.log(cartStateString);
 
     localStorage.setItem("@CoffeeDelivery:cart-1.0.0", cartStateString);
   }, [cartState]);
@@ -62,9 +106,14 @@ export const CoffeesContextProvider = ({
     <CoffeesContext.Provider
       value={{
         coffees,
+        currency,
         selectedCoffees,
+        checkoutCoffeeInfos,
         addCoffeeToCart,
         removeCoffeeFromCart,
+        changeQuantityFromCart,
+        changeCheckoutCoffeeInfos,
+        formatCoffeePrice,
       }}
     >
       {children}

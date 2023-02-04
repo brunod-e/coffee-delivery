@@ -1,9 +1,10 @@
-import { Coffee } from "./reducer";
+import { CheckoutCoffeeInfos, Coffee } from "./reducer";
 
 export enum ActionTypes {
   ADD_TO_CART = "ADD_TO_CART",
   REMOVE_FROM_CART = "REMOVE_FROM_CART",
-  GET_ITEMS_FROM_CART = "GET_ITEMS_FROM_CART",
+  CHANGE_QUANTITY = "CHANGE_QUANTITY",
+  CHANGE_CHECKOUT_INFOS = "CHANGE_CHECKOUT_INFOS",
 }
 
 export const addCoffeeToCartAction = (newCoffee: Coffee) => ({
@@ -11,11 +12,19 @@ export const addCoffeeToCartAction = (newCoffee: Coffee) => ({
   payload: { newCoffee },
 });
 
-export const removeCoffeeFromCartAction = (selectedCoffee: Coffee) => ({
+export const removeCoffeeFromCartAction = (coffeeId: string) => ({
   type: ActionTypes.REMOVE_FROM_CART,
-  payload: { selectedCoffee },
+  payload: { coffeeId },
 });
 
-export const getItemsFromCartAction = () => ({
-  type: ActionTypes.GET_ITEMS_FROM_CART,
+export const changeQuantityFromCartAction = (
+  coffeeId: string,
+  quantity: number
+) => ({
+  type: ActionTypes.CHANGE_QUANTITY,
+  payload: { coffeeId, quantity },
 });
+
+export const changeCheckoutCoffeeInfosAction = (
+  infos: CheckoutCoffeeInfos
+) => ({ type: ActionTypes.CHANGE_CHECKOUT_INFOS, payload: { infos } });

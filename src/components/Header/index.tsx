@@ -1,5 +1,6 @@
 import { MapPin, ShoppingCart } from "phosphor-react";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logoCoffeeDelivery from "../../assets/logo.svg";
 import { CoffeesContext } from "../../context/CoffeesContext";
 import {
@@ -10,6 +11,8 @@ import {
 } from "./styles";
 
 export const Header = () => {
+  const navigate = useNavigate();
+
   const { selectedCoffees } = useContext(CoffeesContext);
   const [cartItemsQuantity, setCartItemsQuantity] = useState(0);
 
@@ -20,13 +23,13 @@ export const Header = () => {
 
   return (
     <HeaderContainer>
-      <img src={logoCoffeeDelivery} alt='' />
+      <img src={logoCoffeeDelivery} alt='' onClick={() => navigate("/")} />
       <InfosContainer>
         <CityInfos>
           <MapPin size={20} weight='fill' />
           São José, SC
         </CityInfos>
-        <CartButton type='button'>
+        <CartButton type='button' onClick={() => navigate("/checkout")}>
           <ShoppingCart size={20} weight='fill' />
           <span>{cartItemsQuantity}</span>
         </CartButton>

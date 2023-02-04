@@ -6,6 +6,10 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
 
   padding: 2rem 13rem;
+
+  img {
+    cursor: pointer;
+  }
 `;
 
 export const CartButton = styled.button`
@@ -18,10 +22,15 @@ export const CartButton = styled.button`
 
   cursor: pointer;
 
+  transition: 0.3s;
+
   background: ${(props) => props.theme["yellow-light"]};
   color: ${(props) => props.theme["yellow-dark"]};
 
-  transition: 0.5s;
+  &:hover {
+    background: ${(props) => props.theme["yellow"]};
+    color: ${(props) => props.theme["yellow-light"]};
+  }
 
   span {
     display: flex;

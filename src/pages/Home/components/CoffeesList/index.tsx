@@ -10,20 +10,23 @@ export const CoffeesList = () => {
     <CoffeesListContainer>
       <section>Nossos cafés</section>
       <CoffeesGrid>
-        {coffees.map(({ id, coffeeImg, types, title, description, price }) => {
-          return (
-            <React.Fragment key={id}>
-              <Card
-                id={id}
-                coffeeImg={coffeeImg}
-                types={types}
-                title={title}
-                description={description}
-                price={price}
-              />
-            </React.Fragment>
-          );
-        })}
+        {coffees.map(
+          ({ id, coffeeImg, types, title, description, price, quantity }) => {
+            return (
+              <React.Fragment key={id}>
+                <Card
+                  id={id}
+                  coffeeImg={coffeeImg}
+                  types={types}
+                  title={title}
+                  description={description}
+                  price={price}
+                  quantity={quantity}
+                />
+              </React.Fragment>
+            );
+          }
+        )}
       </CoffeesGrid>
     </CoffeesListContainer>
   );

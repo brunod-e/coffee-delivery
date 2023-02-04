@@ -12,15 +12,14 @@ import {
 } from "./styles";
 
 export const Card = ({
-  key,
   id,
   coffeeImg,
   types,
   title,
   description,
   price,
-}: any) => {
-  const { addCoffeeToCart, removeCoffeeFromCart } = useContext(CoffeesContext);
+}: Coffee) => {
+  const { addCoffeeToCart, formatCoffeePrice } = useContext(CoffeesContext);
   const [quantity, setQuantity] = useState(1);
 
   const handleAddToCart = () => {
@@ -46,7 +45,7 @@ export const Card = ({
 
   return (
     <CardContainer>
-      <img src={coffeeImg} alt={title} />
+      <img src={`${coffeeImg}`} alt={title} />
 
       <TypesContainer>
         {types.map((type: string) => (
@@ -59,7 +58,7 @@ export const Card = ({
       <p>{description}</p>
       <CoffeeBuyInfos>
         <sub>
-          R$<h1>{price}</h1>
+          R$<h1>{formatCoffeePrice(price)}</h1>
         </sub>
         <QuantitySelect>
           <button onClick={handleDecreaseQuantity}>

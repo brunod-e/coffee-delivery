@@ -86,6 +86,10 @@ export const QuantitySelect = styled.div`
     color: ${(props) => props.theme["purple"]};
     background: none;
     border: none;
+
+    &:hover {
+      color: ${(props) => props.theme["purple-dark"]};
+    }
   }
 `;
 
